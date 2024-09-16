@@ -1,3 +1,4 @@
+#include "../credis-common/include/credis_common.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +14,6 @@
 #define SERVER_IP "127.0.0.1"
 
 // Function prototypes
-void logger(const char* level, const char* format, ...);
 struct sockaddr_in create_server_addr(const char* ip, uint16_t port);
 int connect_to_server(const char* ip, uint16_t port);
 int send_message(int sock_fd, const char* message);
@@ -41,23 +41,6 @@ int main() {
 
     close(sock_fd);
     return 0;
-}
-
-// Logger implementation
-void logger(const char* level, const char* format, ...) {
-    time_t now;
-    time(&now);
-    char time_buf[20];
-    strftime(time_buf, sizeof(time_buf), "%Y-%m-%d %H:%M:%S", localtime(&now));
-
-    va_list args;
-    va_start(args, format);
-
-    printf("[%s] %s: ", time_buf, level);
-    vprintf(format, args);
-    printf("\n");
-
-    va_end(args);
 }
 
 struct sockaddr_in create_server_addr(const char* ip, uint16_t port) {

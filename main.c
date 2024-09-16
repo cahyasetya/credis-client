@@ -32,8 +32,17 @@ int main() {
         return 1;
     }
 
-    const char* message = "hello";
-    if (query(sock_fd, message) < 0) {
+    if (query(sock_fd, "hello1") < 0) {
+        close(sock_fd);
+        return 1;
+    }
+
+    if (query(sock_fd, "hello2") < 0) {
+        close(sock_fd);
+        return 1;
+    }
+
+    if (query(sock_fd, "hello3") < 0) {
         close(sock_fd);
         return 1;
     }
